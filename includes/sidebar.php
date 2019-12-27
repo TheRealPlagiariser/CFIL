@@ -31,6 +31,15 @@
                     </span>
                   </a>
                 </li>
+                <li class="nav-item <?php if($activeApp=='tv'){ echo 'activeApp'; } ?>">
+                  <a href="../TeamVelocity/team.php" role="button" aria-expanded="false" class="nav-link dropdown-toggle" title='Team Velocity'>
+                    <i class=" big-icon  fab fa-accessible-icon"></i>
+                    <span class="mini-dn">Team Velocity</span>
+                    <span class="indicator-right-menu mini-dn">
+                      <i class="fa indicator-mn fa-angle-left"></i>
+                    </span>
+                  </a>
+                </li>
 
                 <!-- <li class="nav-item <?php //if($activeApp=='na'){ echo 'activeApp'; } ?>">
                   <a href="#" role="button" aria-expanded="false" class="nav-link dropdown-toggle">

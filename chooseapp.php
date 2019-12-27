@@ -168,6 +168,25 @@ if(!isset($_SESSION['Username']))
                             </div>
                         </div>
                       </a>
+                      <a href="TeamVelocity/team.php">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="single-skill widget-ov-mg-t-30 shadow-reset app">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="progress-circular  text-center mg-t-10">
+                                              <i style="color: #039cfd;" class="fab fa-accessible-icon fa-5x"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="progress-circular2">
+                                            <h2>Team Velocity</h2>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </a>
 
                         <!-- <a href="#">
                           <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
