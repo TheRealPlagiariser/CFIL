@@ -8,7 +8,7 @@
                       <ul class="nav navbar-nav mai-top-nav">
                           <li class="nav-item <?php if($active=='team'){ echo 'active'; } ?>"><a href="team.php" class="nav-link">Team </a>
                           </li>
-                          <li class="nav-item <?php if($active=='improvementrecord'){ echo 'active'; } ?>"><a href="record.php" class="nav-link">Record</a>
+                          <li class="nav-item <?php if($active=='cycle'){ echo 'active'; } ?>"><a href="cycle.php" class="nav-link">Cycle</a>
                           </li>
                           <li class="nav-item <?php if($active=='activity'){ echo 'active'; } ?>"><a href="activity.php" class="nav-link">Activity</a>
                           </li>

@@ -26,7 +26,10 @@ if(isset($_POST)){
 
   $select=$select->fetchALL(PDO::FETCH_ASSOC);
 
-  //echo json_encode($select,JSON_PRETTY_PRINT);
+  if (!(isset($from) && $from="team.php")){
+    echo json_encode($select,JSON_PRETTY_PRINT);
+  }
+
 }
 
  ?>

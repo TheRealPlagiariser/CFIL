@@ -37,10 +37,66 @@ if($_POST)
                   .")";
 
       $result=$conn->exec($insert);
+      //$teamId = $conn->lastInsertId();
+
+// if QA value inserted into field
+    if(isset($_POST['txtQa']) )
+    {
+      $findInsertedTeam = "SELECT teamId FROM team WHERE deleted=0 AND teamName=".$conn->quote($_POST['txtTeamName'])." ORDER BY teamId DESC";
+      $resultTeamId=$conn->query($findInsertedTeam);
+      $resultTeamId= $resultTeamId->fetchALL(PDO::FETCH_ASSOC);
+      $resultTeamId=$resultTeamId[0]['teamId'];
+
+      $arrSuccess['teamIdResults'] = $resultTeamId;
+
+
+      //$arrSuccess['qaposting']= "yes qa has been posted";
+
+      //check if exists
+      $search =" SELECT *
+                FROM qualityassurance
+                WHERE deleted=0 AND qaUsername =".$conn->quote($_POST['txtQa']);
+
+      $resultSearch=$conn->query($search);
+      if($resultSearch->rowCount() == 0){
+        // add new QA
+        $addQa = " INSERT INTO qualityassurance (qaUsername)
+                  VALUES("
+                    .$conn->quote($_POST['txtQa'])
+                    .")";
+
+        $resultAddQa= $conn->exec($addQa);
+
+
+
+      }
+
+      $findInsertedQa = "SELECT qualityAssuranceId FROM qualityassurance WHERE deleted=0 AND qaUsername=".$conn->quote($_POST['txtQa'])." ORDER BY qualityAssuranceId DESC";
+      $resultQaId=$conn->query($findInsertedQa);
+      $resultQaId= $resultQaId->fetchALL(PDO::FETCH_ASSOC);
+      $resultQaId=$resultQaId[0]['qualityAssuranceId'];
+
+      $arrSuccess['qaIdResults'] = $resultQaId;
+
+      //link QA to team
+      $addTeamQa = " INSERT INTO teamqualityassurance (teamId, QualityAssuranceId)
+                VALUES("
+                  .$conn->quote($resultTeamId)
+                  .","
+                  .$conn->quote($resultQaId)
+                  .")";
+      $resultTeamQa = $conn->exec($addTeamQa);
+      $arrSuccess['resultTeamQa'] = $resultTeamQa;
+
+
+    }
+    // if QA value inserted into field END
+
       if($result !== FALSE)
       {
         $arrSuccess['success']=true;
         $arrSuccess['result']="Team added Successful";
+
 
         //  header("location:../../project.php");
       }

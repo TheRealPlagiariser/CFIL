@@ -99,6 +99,7 @@ $('textarea').on('keypress', function(e) {
     return false;
   }
 });
+
 function setSelectionRange(input, selectionStart, selectionEnd) {
   if (input.setSelectionRange) {
     input.focus();
@@ -145,7 +146,7 @@ function validateUser(searchvalue){
     {
       if (data.success)
       {
-        $("#txtOwner")[0].setCustomValidity("");
+        $("#txtQa")[0].setCustomValidity("");
         if (data.result.count >0)
         {
           var email="";
@@ -158,21 +159,21 @@ function validateUser(searchvalue){
           }
           $("#frmCreateActionItem").find("input[name='email']").remove();
           $("#frmCreateActionItem").append('<input type="hidden" name="email" value="'+email+'" />');
-          $("#txtOwner").val(fullName);
+          $("#txtQa").val(username);
           $("#btnValidateUser").html('<i title="Authorised user" class="fas fa-user-check" style="color:green;"><div id="loading-image" style="display: none;" class="loader"><img src="images/ajax-loader.gif" alt="Loading..." class="img-responsive center-block"></div></i>');
           bool=true;
         }
         else
         {
-          $("#txtOwner")[0].setCustomValidity("This user cannot be the owner of a Pain Point");
-          $("#txtOwner")[0].reportValidity();
+          $("#txtQa")[0].setCustomValidity("This user does not exist.");
+          $("#txtQa")[0].reportValidity();
           $("#btnValidateUser").html('<i title="Unauthorised user" class="fas fa-user-times" style="color:red;"><div id="loading-image" style="display: none;" class="loader"><img src="images/ajax-loader.gif" alt="Loading..." class="img-responsive center-block"></div></i>');
         }
       }
       else
       {
-        $("#txtOwner")[0].setCustomValidity("An error occured");
-        $("#txtOwner")[0].reportValidity();
+        $("#txtQa")[0].setCustomValidity("An error occured");
+        $("#txtQa")[0].reportValidity();
 
       }
     }
@@ -182,21 +183,23 @@ function validateUser(searchvalue){
     }
   });
 }
-$("#txtOwner").on("change", function(){
-  $("#txtOwner")[0].setCustomValidity("");
-  if($("#txtOwner").val().toLowerCase().replace(/\s+/g, " ").trim() != ""){
-    var searchvalue = $("#txtOwner").val();
+
+$("#txtQa").on("change", function(){
+  $("#txtQa")[0].setCustomValidity("");
+  if($("#txtQa").val().toLowerCase().replace(/\s+/g, " ").trim() != ""){
+    var searchvalue = $("#txtQa").val();
     // // console.log(searchvalue);
     validateUser(searchvalue);
   }
 
 });
-$("#txtOwner").on("keyup", function(e){
-  $("#txtOwner")[0].setCustomValidity("");
+
+$("#txtQa").on("keyup", function(e){
+  $("#txtQa")[0].setCustomValidity("");
   var keyCode = e.keyCode || e.which;
   if (keyCode === 8 || keyCode === 46) {
     $(this).val("");
     $("#btnValidateUser").html('<i title="Check Username" class="fas fa-user-plus"><div id="loading-image" style="display: none;" class="loader"><img src="images/ajax-loader.gif" alt="Loading..." class="img-responsive center-block"></div></i>');
   }
-  $("#txtOwner")[0].setCustomValidity("");
+  $("#txtQa")[0].setCustomValidity("");
 });

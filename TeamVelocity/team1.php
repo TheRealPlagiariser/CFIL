@@ -45,7 +45,9 @@
 
       .flip-card {
         background-color: transparent;
-        width: 300px;
+        width: 100%;
+        margin: 0 auto;
+        max-width: 500px;
         height: 300px;
         perspective: 1000px;
       }
@@ -210,11 +212,75 @@
           $active="team";
             include 'includes/menu.php';
           ?>
+
+
+          <!--__________________________________________________________________________________________________________________________________________-->
+          <div class="admin-dashone-data-table-area">
+              <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-lg-12">
+                          <div class="sparkline13-list shadow-reset">
+                              <div class="sparkline13-hd">
+                                  <div class="main-sparkline13-hd">
+                                      <h1>Teams</h1>
+                                  </div>
+                              </div>
+                              <div class="sparkline13-graph">
+                                  <div class="datatable-dashv1-list custom-datatable-overright">
+                                    <div class="text-left mg-b-40">
+                                        <!-- <a id="btnCreateActionItem" href="createActionItem.php" class="btn btn-success btn-sm" >Add New Action Item</a> -->
+                                      <button id=""  class="btn btn-success btn-sm" type="button"  data-toggle="modal" data-target="#mdlAddTeam">Add Team</button>
+
+                                    </div>
+                                    <?php
+                                      $from ="team.php";
+                                      include "includes/Team/getTeam.php";
+
+                                    ?>
+                                    <div class ="container-fluid">
+                                      <div class="row">
+                                        <?php foreach($select as $key=>$value)
+                                          {
+                                        ?>
+                                        <div   class="col-lg-3 mg-b-40">
+                                          <div class="flip-card " >
+                                            <div class="flip-card-inner">
+                                              <div class="flip-card-front">
+                                                <h1><?php echo $value['teamName']; ?></h1>
+
+                                              </div>
+                                              <div class="flip-card-back">
+                                                <h1><?php echo $value['teamName'] ?></h1>
+                                                <p><a class="btn btn-danger" style="color:yellow" href="qa.php">QAs</a></p>
+                                                <p><form id="<?php echo $value['teamId']; ?>" method="post" action="cycle.php">
+                                                  <input type="hidden" name="teamId" value="<?php echo $value['teamId']; ?>" />
+                                                    <a style="color:yellow" class="btn btn-info" onclick="document.getElementById('<?php echo $value['teamId']; ?>').submit();">Cycles</a>
+                                                </form></p>
+                                                <p><a class="btn btn-danger" style="color:yellow" href="defect.php">Defects</a></p>
+                                                <p><a class="btn btn-warning" style="color:yellow" href="task.php">Tasks</a></p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <?php
+                                          }
+                                        ?>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+            <!--__________________________________________________________________________________________________________________________________________-->
           <!-- stat of content -->
 
-          <div class="text-center">
+          <!-- <div class="text-center">
               <button style="padding: 15px 32px ;font-size: 16px;"  type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#mdlAddTeam">Add Team</button>
-          </div>
+          </div> -->
           <!-- Modal -->
           <div id="mdlAddTeam" class="modal fade" role="dialog"  data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
@@ -247,7 +313,7 @@
                           </div>
                           <div class="col-md-9 col-sm-9 col-xs-9">
                             <div class="input-group custom-go-button">
-                              <input id="txtQa" name="txtQa" type="text" class="form-control" placeholder="Enter Username ONLY" >
+                              <input id="txtQa" name="txtQa" type="text" class="form-control" placeholder="Enter Username ONLY" required>
                               <span class="input-group-btn">
                                 <button type="button" id="btnValidateUser" class="btn ">
                                   <i class="fas fa-user-plus" title="Check Username">
@@ -273,39 +339,7 @@
           </div>
           <br><br>
           <!-- End modal -->
-          <?php
-            $from ="team.php";
-            include "includes/Team/getTeam.php";
 
-          ?>
-          <div class ="container">
-            <div class="grid">
-                <?php foreach($select as $key=>$value)
-                  {
-                ?>
-              <div class="flip-card">
-                <div class="flip-card-inner">
-                  <div class="flip-card-front">
-                    <h1><?php echo $value['teamName']; ?></h1>
-
-                  </div>
-                  <div class="flip-card-back">
-                    <h1><?php echo $value['teamName'] ?></h1>
-                    <p><a class="btn btn-danger" style="color:yellow" href="qa.php">QAs</a></p>
-                    <p><form id="<?php echo $value['teamId']; ?>" method="post" action="cycle.php">
-                      <input type="hidden" name="teamId" value="<?php echo $value['teamId']; ?>" />
-                        <a style="color:yellow" class="btn btn-info" onclick="document.getElementById('<?php echo $value['teamId']; ?>').submit();">Cycles</a>
-                    </form></p>
-                    <p><a class="btn btn-danger" style="color:yellow" href="defect.php">Defects</a></p>
-                    <p><a class="btn btn-warning" style="color:yellow" href="task.php">Tasks</a></p>
-                  </div>
-                </div>
-              </div>
-              <?php
-                }
-             ?>
-            </div>
-          </div>
           <!-- end of content -->
         </div>
     </div>
@@ -426,7 +460,6 @@
 
           $("#frmmodalForm :input").not(".changed").not("[type='hidden']").attr("disabled",true);
           formdata=$('#frmmodalForm').serialize();
-          console.log(formdata);
 
           $("#frmmodalForm :input").not(".changed").attr("disabled",false);
           $("#frmmodalForm ").find("input[type='hidden']").remove();

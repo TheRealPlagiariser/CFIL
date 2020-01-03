@@ -3,9 +3,9 @@
 if($_POST)
 {
   include '../db_connect.php';
-  $update=" UPDATE team
+  $update=" UPDATE qualityassurance
             SET deleted=1
-            WHERE teamId=".$_POST['teamId'];
+            WHERE qualityAssuranceId=".$_POST['qualityAssuranceId'];
 
   $result=$conn->exec($update);
 
@@ -13,7 +13,7 @@ if($_POST)
   if($result !== FALSE)
   {
     $arrSuccess['success']=true;
-    $arrSuccess['result']="Team deleted Successful";
+    $arrSuccess['result']="QA deleted Successful";
   }
   else
   {

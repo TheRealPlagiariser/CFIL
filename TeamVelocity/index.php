@@ -1,1 +1,1 @@
-<?php header("location: actionitem.php"); ?>
+<?php header("location: team.php"); ?>
